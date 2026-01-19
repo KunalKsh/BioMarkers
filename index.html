@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioRisk Initiative | Decode Your Health</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Range Slider */
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%;
+            background: #0ea5e9; margin-top: -8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #e2e8f0; border-radius: 2px; }
+        .organ-pulse { animation: pulse-opacity 2s infinite; }
+        @keyframes pulse-opacity { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5)); } }
+        .radio-card-input:checked + .radio-card { background-color: #f0f9ff; border-color: #0ea5e9; color: #0369a1; }
+        /* Error highlight class */
+        .error-border { border-color: #ef4444 !important; background-color: #fef2f2 !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-heart-pulse text-brand-600 text-2xl mr-2"></i>
+                    <span class="font-bold text-xl text-brand-900">BioRisk<span class="text-brand-500">Map</span></span>
+                </div>
+                <a href="#participate" class="bg-brand-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-700 transition shadow-lg">Join Pilot</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-16 bg-gradient-to-b from-brand-50 to-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 z-10 fade-in">
+                <span class="inline-block bg-brand-100 text-brand-700 px-3 py-1 rounded-full text-xs font-bold tracking-wide mb-4">CAPSTONE PROJECT INITIATIVE - Kunal Kaushal</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight mb-6">Don't just read your blood report. <br> <span class="text-brand-600">Understand your body.</span></h1>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">Most reports just give you numbers. We are building a system that tells you exactly which <strong>organ system</strong> is at risk and helps you find the right doctor.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#how-it-works" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition text-center">See How It Works</a>
+                    <a href="#participate" class="px-6 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition shadow-lg text-center flex items-center justify-center gap-2"><span>Contribute Data</span> <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 relative flex justify-center fade-in">
+                <div class="absolute top-0 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob"></div>
+                <div class="bg-white p-6 rounded-2xl shadow-2xl border border-slate-100 max-w-sm w-full relative z-10">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2"><span class="text-xs font-bold text-slate-400">PROJECT SIMULATION</span><span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">System Active</span></div>
+                    <div class="flex gap-4">
+                        <div class="w-1/3 relative flex justify-center">
+                            <svg viewBox="0 0 100 240" class="h-56 w-auto drop-shadow-md">
+                                <path d="M50,10 C60,10 65,18 65,28 C65,38 60,45 50,45 C40,45 35,38 35,28 C35,18 40,10 50,10 Z M50,45 C70,45 80,55 85,75 L90,140 L80,140 L75,90 L70,230 L55,230 L55,160 L45,160 L45,230 L30,230 L25,90 L20,140 L10,140 L15,75 C20,55 30,45 50,45 Z" fill="#e2e8f0" />
+                                <circle cx="56" cy="65" r="5" fill="#ef4444" class="organ-pulse" />
+                            </svg>
+                        </div>
+                        <div class="w-2/3 flex flex-col justify-center space-y-3">
+                            <div class="bg-red-50 p-2 rounded border-l-4 border-red-500"><p class="text-[10px] text-slate-500 uppercase font-bold">Primary Concern</p><p class="text-sm font-bold text-red-700">Cardiovascular Risk</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="participate" class="py-16 bg-slate-100">
+        <div class="max-w-2xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="bg-brand-600 px-6 py-4"><p class="text-white font-medium text-sm flex items-center gap-2"><i class="fa-solid fa-lock"></i> Secure & Anonymous Research Submission</p></div>
+
+                <form id="bioForm" class="p-6 md:p-8 space-y-8" onsubmit="submitForm(event)">
+                    
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b pb-2">1. About You</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Age *</label>
+                                <div class="flex items-center gap-3">
+                                    <input id="age" type="number" placeholder="25" class="w-20 p-2 border rounded-lg text-center font-bold text-lg focus:ring-2 focus:ring-brand-500 outline-none">
+                                    <span class="text-slate-500 text-sm">years old</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Gender *</label>
+                                <div class="flex gap-2" id="genderGroup">
+                                    <label class="cursor-pointer flex-1">
+                                        <input type="radio" name="gender" value="Male" class="peer sr-only">
+                                        <div class="border rounded-lg p-2 text-center peer-checked:bg-brand-50 peer-checked:border-brand-500 peer-checked:text-brand-700 hover:bg-slate-50 transition">Male</div>
+                                    </label>
+                                    <label class="cursor-pointer flex-1">
+                                        <input type="radio" name="gender" value="Female" class="peer sr-only">
+                                        <div class="border rounded-lg p-2 text-center peer-checked:bg-brand-50 peer-checked:border-brand-500 peer-checked:text-brand-700 hover:bg-slate-50 transition">Female</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Location *</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <input id="city" type="text" placeholder="City" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50">
+                                <input id="state" type="text" placeholder="State" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50">
+                                <input id="country" type="text" placeholder="Country" value="India" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b pb-2">2. Lifestyle Factors</h4>
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold text-slate-700 mb-3">Physical Activity *</label>
+                            <div class="grid grid-cols-3 gap-2" id="activityGroup">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="activity" value="Sedentary" class="radio-card-input sr-only">
+                                    <div class="radio-card border rounded-lg p-3 text-center hover:bg-slate-50 transition"><i class="fa-solid fa-chair text-slate-400 mb-1 block"></i><span class="text-xs font-medium">Sedentary</span></div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="activity" value="Moderate" class="radio-card-input sr-only">
+                                    <div class="radio-card border rounded-lg p-3 text-center hover:bg-slate-50 transition"><i class="fa-solid fa-person-walking text-slate-400 mb-1 block"></i><span class="text-xs font-medium">Moderate</span></div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="activity" value="Active" class="radio-card-input sr-only">
+                                    <div class="radio-card border rounded-lg p-3 text-center hover:bg-slate-50 transition"><i class="fa-solid fa-person-running text-slate-400 mb-1 block"></i><span class="text-xs font-medium">Active</span></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2"><label class="text-sm font-semibold text-slate-700">Average Sleep</label><span class="text-brand-600 font-bold" id="sleepDisplay">7 Hrs</span></div>
+                            <input id="sleepInput" type="range" min="3" max="12" value="7" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="document.getElementById('sleepDisplay').innerText = this.value + ' Hrs'">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-3 border rounded-lg flex items-center justify-between">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-smoking text-slate-400"></i> <span class="text-sm font-medium">Smoker?</span></div>
+                                <label class="relative inline-flex items-center cursor-pointer"><input id="smoker" type="checkbox" class="sr-only peer"><div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div></label>
+                            </div>
+                            <div class="p-3 border rounded-lg flex items-center justify-between">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-wine-glass text-slate-400"></i> <span class="text-sm font-medium">Alcohol?</span></div>
+                                <label class="relative inline-flex items-center cursor-pointer"><input id="alcohol" type="checkbox" class="sr-only peer"><div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b pb-2">3. Medical Data</h4>
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Current Blood Report (Required) *</label>
+                            <div id="primaryDropZone" onclick="document.getElementById('fileInputPrimary').click()" class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:bg-brand-50 transition cursor-pointer group">
+                                <div class="text-brand-500 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                                <p class="font-medium text-slate-700 text-sm">Upload PDF or Image</p>
+                                <input id="fileInputPrimary" type="file" class="hidden" accept=".pdf,.jpg,.png" onchange="updateFileName('fileInputPrimary', 'fileNamePrimary')">
+                            </div>
+                            <p id="fileNamePrimary" class="text-xs text-brand-600 font-bold mt-2 text-center h-4"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Other Medical History (Optional)</label>
+                            <div class="border border-slate-200 rounded-xl p-4 flex items-center justify-between bg-slate-50">
+                                <span id="fileNameSecondary" class="text-sm text-slate-500 truncate w-2/3">Attach past reports, prescriptions...</span>
+                                <label class="bg-white border border-slate-300 text-slate-600 px-3 py-1 rounded text-sm hover:bg-slate-100 cursor-pointer transition shadow-sm">
+                                    Browse
+                                    <input id="fileInputSecondary" type="file" class="hidden" multiple onchange="updateFileName('fileInputSecondary', 'fileNameSecondary')">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="submitBtn" class="w-full bg-brand-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-brand-700 transition transform hover:-translate-y-1">
+                        Submit Data securely
+                    </button>
+                    <p class="text-center text-xs text-slate-400">By submitting, you agree to participate in this academic research.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center"><p class="font-bold text-white mb-2">Capstone Project Initiative - Kunal Kaushal </p></div>
+    </footer>
+
+    <script>
+    function updateFileName(inputId, displayId) {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(displayId);
+        if (input.files.length > 0) {
+            display.innerText = "Selected: " + input.files[0].name + (input.files.length > 1 ? ` (+${input.files.length - 1} more)` : "");
+            display.classList.add("text-brand-600", "font-bold");
+            // Remove error styling if present
+            if(inputId === 'fileInputPrimary') document.getElementById('primaryDropZone').classList.remove('error-border');
+        }
+    }
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve({ name: file.name, type: file.type, base64: reader.result.split(',')[1] });
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function validateInputs() {
+        let isValid = true;
+        
+        // Helper to check and highlight
+        const check = (id, condition) => {
+            const el = document.getElementById(id);
+            if (!condition) {
+                el.classList.add('error-border');
+                isValid = false;
+            } else {
+                el.classList.remove('error-border');
+            }
+        };
+
+        const age = document.getElementById("age").value;
+        check("age", age && !isNaN(age) && age > 0 && age < 120);
+        check("city", document.getElementById("city").value.trim() !== "");
+        check("state", document.getElementById("state").value.trim() !== "");
+        check("country", document.getElementById("country").value.trim() !== "");
+        
+        // Radio buttons
+        const gender = document.querySelector('input[name="gender"]:checked');
+        if(!gender) { isValid = false; alert("Please select a Gender."); }
+        
+        const activity = document.querySelector('input[name="activity"]:checked');
+        if(!activity) { isValid = false; alert("Please select an Activity Level."); }
+
+        // Primary File
+        const primaryFile = document.getElementById("fileInputPrimary");
+        if(primaryFile.files.length === 0) {
+            document.getElementById('primaryDropZone').classList.add('error-border');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    async function submitForm(event) {
+        event.preventDefault();
+        const btn = document.getElementById("submitBtn");
+        
+        // 1. Strict Validation
+        if (!validateInputs()) {
+            alert("Please fill in all mandatory fields correctly (marked with *).");
+            return;
+        }
+
+        const originalText = btn.innerText;
+        btn.innerText = "Encrypting & Uploading... (This may take ~10s)";
+        btn.disabled = true;
+        btn.classList.add("opacity-50", "cursor-not-allowed");
+
+        try {
+            // 2. Prepare Payload with Separated Files
+            const primaryInput = document.getElementById("fileInputPrimary");
+            const secondaryInput = document.getElementById("fileInputSecondary");
+
+            // Process Primary (Mandatory)
+            const primaryFileObj = await readFileAsBase64(primaryInput.files[0]);
+
+            // Process Secondary (Optional)
+            const secondaryFilesArr = [];
+            if (secondaryInput.files.length > 0) {
+                for(let i=0; i<secondaryInput.files.length; i++) {
+                    secondaryFilesArr.push(await readFileAsBase64(secondaryInput.files[i]));
+                }
+            }
+
+            const payload = {
+                age: Number(document.getElementById("age").value),
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                city: document.getElementById("city").value,
+                state: document.getElementById("state").value,
+                country: document.getElementById("country").value,
+                activity: document.querySelector('input[name="activity"]:checked').value,
+                sleep: document.getElementById("sleepInput").value,
+                smoker: document.getElementById("smoker").checked,
+                alcohol: document.getElementById("alcohol").checked,
+                primaryFile: primaryFileObj,      // Send as distinct object
+                secondaryFiles: secondaryFilesArr // Send as distinct array
+            };
+
+            // *** PASTE YOUR NEW WEB APP URL HERE ***
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyxX4732vq7HH1gJ3anJYhGYDNJura6iHqzfUn4kFaz96wMqQN06lmGHxu6vGqi9R75/exec';
+
+            const res = await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                redirect: "follow",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+
+            if (result.status === "success") {
+                alert("Submission successful!");
+                event.target.reset();
+                document.getElementById('fileNamePrimary').innerText = "";
+                document.getElementById('fileNameSecondary').innerText = "Attach past reports...";
+                document.getElementById('sleepDisplay').innerText = "7 Hrs";
+            } else {
+                throw new Error(result.message);
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Upload failed: " + error.message);
+        } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+    }
+    </script>
+</body>
+</html>
